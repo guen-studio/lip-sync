@@ -63,12 +63,9 @@ class LIPSYNC2D_OT_AnalyzeAudio(bpy.types.Operator):
 
         self.set_bake_range()
         file_path = extract_audio()
-
-        if not os.path.isfile(f"{file_path}"):
-            self.report(
-                type={"ERROR"},
-                message="Error while importing extracted audio WAV file from /tmp",
-            )
+        
+        if not os.path.isfile(file_path):
+            self.report(type={"ERROR"}, message="Error while importing extracted audio WAV file from /tmp")
             self.reset_bake_range()
             return {"CANCELLED"}
 
@@ -224,13 +221,12 @@ class LIPSYNC2D_OT_AnalyzeAudio(bpy.types.Operator):
         bpy.context.scene.frame_start = self.frame_start
         bpy.context.scene.frame_end = self.frame_end
 
-
 def extract_audio():
     package_name = cast(str, get_package_name())
     output_path = bpy.utils.extension_path_user(package_name, path="tmp", create=True)
     filepath = os.path.join(output_path, "cgp_lipsync_extracted_audio.wav")
 
-    bpy.ops.sound.mixdown(
+    result = bpy.ops.sound.mixdown(
         filepath=filepath,
         check_existing=False,
         container="WAV",
@@ -239,5 +235,34 @@ def extract_audio():
         mixrate=16000,  # Sample rate for Vosk
         channels="MONO",  # Vosk prefers mono
     )
+    # Aguarda criação do arquivo e liberaração do handle
+    # Awaiting file creation and handle release.
+    import time
+    
+    # Tempo máximo de espera em segundos
+    # Maximum wait time in seconds
+    timemax = 1.0 
+    
+    # Checagem a cada 10 milissegundos
+    # Check every 10 milliseconds
+    timechk = 0.01
+    
+    timeout = time.time() + timemax
 
-    return filepath
+    while time.time() < timeout:
+        if os.path.exists(filepath):
+            try:
+                # Tenta abrir em modo append binário para checar o lock
+                # Try opening it in binary append mode to check the lock.
+                with open(filepath, 'a+b'):
+                    # Arquivo pronto e liberado para o Vosk!
+                    # File ready and released for Vosk!
+                    return filepath  
+            except (PermissionError, IOError):
+                # Ainda não liberou o handle do arquivo
+                # The file handle hasn't been released yet.
+                pass
+        time.sleep(timechk)
+    raise TimeoutError(f"Blender did not release the extracted audio in time: {filepath}")
+    
+    #return filepath
