@@ -7,7 +7,7 @@ Cross-platform (Windows, macOS, Linux), works **out of the box** with **~25 lang
 
 https://github.com/user-attachments/assets/cb90ea7b-02fc-4ca1-b19f-631024cd79cd
 
-https://private-user-images.githubusercontent.com/71397668/633415515-aee2a486-6aaf-4275-9ce6-bb961860f8ea.mp4
+https://github.com/user-attachments/assets/03870dbe-a78c-47f2-b92e-b4569c65f72d
 
 ## ✨ Features
 
