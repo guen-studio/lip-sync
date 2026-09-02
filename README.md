@@ -33,7 +33,7 @@ When you select a Language Model for the first time, Model file is downloaded an
 1. Import or create a 3D character.
 2. Add your movie / sound clip in Video Sequencer
 3. Go to the **Lip Sync** tab in the **N-panel**.
-4. Select your Language among 30 available languages.
+4. Select your Language among available languages.
 5. Click **Add Spritesheet on Selection** 
 6. Click **Set Mouth Area** from **Edit Mode**
 7. Click **Analyze Audio** and wait few seconds – your character now speaks!
