@@ -15,8 +15,6 @@ https://github.com/user-attachments/assets/03870dbe-a78c-47f2-b92e-b4569c65f72d
 - Interpolates between Shape Key to give natural lips motion
 - 🖼️ Projects a viseme **spritesheet** onto your character’s face (one spritesheet is shipped with the add-on, but you can use your own)
 - 🧠 Uses offline speech recognition (Vosk + Phonemizer + eSpeak)
-- 🖥️ Fully tested on Windows, macOS and Linux
-- 🔜 Future upgrade: **Pose-based animation** for facial rigs
 
 ## 📦 Installation
 <img width="857" height="597" alt="image" src="https://github.com/user-attachments/assets/09db1b2c-173a-4e3a-bc0e-513e327be0bd" />
